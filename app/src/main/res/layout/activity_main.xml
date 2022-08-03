@@ -7,24 +7,42 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginBottom="0dp">
 
+       <androidx.viewpager2.widget.ViewPager2
+           android:id="@+id/viewPager_artSwipe"
+           android:layout_width="match_parent"
+           android:layout_height="364dp"
+           android:layout_gravity="center"
+           android:clipChildren="false"
+           android:clipToPadding="false" />
 
-    <androidx.viewpager.widget.ViewPager
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/ViewPager" />
+   </LinearLayout>
 
     <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
         android:id="@+id/dots_indicator"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:dotsColor="@color/white"
+        android:layout_gravity="center"
+        app:dotsColor="@color/cardview_shadow_start_color"
         app:dotsCornerRadius="8dp"
-        app:dotsSize="16dp"
+        app:dotsSize="10dp"
         app:dotsSpacing="4dp"
         app:dotsWidthFactor="2.5"
-        app:selectedDotColor="@color/black"
-        app:progressMode="true"
-        />
+        app:progressMode="false"
+        app:selectedDotColor="@color/black" />
+
+    <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_gravity="center">
+
+    </LinearLayout>
+
+
+
 
 </LinearLayout>
