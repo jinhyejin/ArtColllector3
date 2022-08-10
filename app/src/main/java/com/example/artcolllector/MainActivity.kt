@@ -8,14 +8,17 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.art_list_item.view.*
+import kotlinx.android.synthetic.main.major_artlist.*
 import java.time.chrono.JapaneseEra.values
 
 private const val NUM_PAGES = 3 // 페이지 수를 정해둠
@@ -25,6 +28,7 @@ class MainActivity : AppCompatActivity()
 //    private var myHandler = MyHandler()
 //    private val intervalTime = 1500.toLong() // 몇초 간격으로 페이지를 넘길것인지 (1500 = 1.5초)
 
+    var viewList = ArrayList<View>();   //주요출품작 표출하기 위한 viewList
 
     override fun onCreate(savedInstanceState: Bundle?)
     {
@@ -37,6 +41,16 @@ class MainActivity : AppCompatActivity()
         val screenWidth = resources.displayMetrics.widthPixels
         val offsetPx = screenWidth - pageMarginPx - pagerWidth
 
+        viewList.add(layoutInflater.inflate(R.layout.fragment_alllist,null));
+        viewList.add(layoutInflater.inflate(R.layout.fragment_majorlist,null));
+        viewList.add(layoutInflater.inflate(R.layout.fragment_premium,null));
+        viewList.add(layoutInflater.inflate(R.layout.fragment_weekly,null));
+
+
+
+
+
+        //여기 아래부분은 메인 화면 작품 슬라이드 부분 구현
 
         viewPager_artSwipe.setPageTransformer { page, position ->
             page.translationX = position * -offsetPx
@@ -47,6 +61,7 @@ class MainActivity : AppCompatActivity()
 
         dots_indicator.setViewPager2(viewPager_artSwipe) // indicator 설정
     }
+    //작품슬라이드 inner class
     private inner class ScreenSlidePagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
         override fun getItemCount(): Int = NUM_PAGES // 페이지 수 리턴
 
@@ -57,7 +72,25 @@ class MainActivity : AppCompatActivity()
             }
         }
     }
-}
+    //주요출품작 viewpager inner class
+//    inner class pagerAdapter : PagerAdapter() {
+//        override fun isViewFromObject(view: View, `object`: Any) = view.equals("object")
+//        override fun getCount() = viewList.size
+//
+//        override fun instantiateItem(container: ViewGroup, position: Int): Any {
+//            var curView = viewList[position]
+//            major_artlist_viewpager.addView((curView))
+//            return curView
+//        }
+//
+//        override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
+//            major_artlist_viewpager.removeView("object" as View)
+//        }
+//    }
+    }
+
+
+
 
 
 // 일정시간마다 자동으로  viewpager 넘어가도록. 미완
